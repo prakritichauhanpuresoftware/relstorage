@@ -359,16 +359,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [cp37-cp37m, cp38-cp38, cp39-cp39]
-        # ubuntu 18.04 ships with mysql 5.7; ubuntu 20.04 ships with
-        # mysql 8.0
+        python-version: [3.7, 3.8, 3.9]
         os: [ubuntu-18.04]
-        include:
-          - os: ubuntu-20.04
-            python-version: cp38-cp38
     env:
-      py: /opt/python/${{ matrix.python-version }}/bin/python
-      img: quay.io/pypa/manylinux2014_aarch64
+      py: python${{ matrix.python-version }}
 
     steps:
       - name: checkout
@@ -385,8 +379,13 @@ jobs:
       - name: Build mysqlclient
         run: |
           docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-            ${{ env.img }} \
-            bash -exc '${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
+            arm64v8/ubuntu \
+            bash -exc 'apt-get update && \
+            apt-get install sudo -y && \
+            sudo apt install software-properties-common -y && \
+            sudo add-apt-repository ppa:deadsnakes/ppa && \
+            sudo apt install -y ${{ env.py }} ${{ env.py }}-pip && \
+            ${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
             echo "Install ccache, configure CFLAGS (ubuntu)" && \
             export CFLAGS="$CFLAGS -std=gnu++11" && \
