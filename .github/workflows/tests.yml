@@ -393,7 +393,6 @@ jobs:
             export CXXFLAGS="$CXXCFLAGS -std=gnu++11" && \
             echo $CXXFLAGS && \
             echo "Install native libs" && \
-            yum install -y libmemcached-devel mysql-devel postgresql-devel && \
             echo "Build mysqlclient" && \
             pip install --no-binary :all: mysqlclient && \
             echo "Install RelStorage" && \
