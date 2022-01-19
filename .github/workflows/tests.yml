@@ -359,7 +359,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.8]
         os: [ubuntu-18.04]
     env:
       py: python${{ matrix.python-version }}
@@ -380,11 +380,11 @@ jobs:
         run: |
           docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             arm64v8/ubuntu \
-            bash -exc 'apt-get update && \
-            apt-get install sudo -y && \
-            sudo apt install software-properties-common -y && \
-            sudo add-apt-repository ppa:deadsnakes/ppa && \
-            sudo apt-get update && \
+            bash -exc 'apt-get update && apt-get -y upgrade && \
+            #apt-get install sudo -y && \
+            #sudo apt install software-properties-common -y && \
+            #sudo add-apt-repository ppa:deadsnakes/ppa && \
+            #sudo apt-get update && \
             sudo apt install -y ${{ env.py }} python3-pip && \
             ${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
