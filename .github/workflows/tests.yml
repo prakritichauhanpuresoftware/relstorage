@@ -355,7 +355,7 @@ jobs:
           parallel: true
 
   test_aarch64:
-    needs: build-relstorage-aarch64
+    #needs: build-relstorage-aarch64
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -371,11 +371,11 @@ jobs:
         id: qemu
         uses: docker/setup-qemu-action@v1
 
-      - name: Download RelStorage wheel
-        uses: actions/download-artifact@v2
-        with:
-          name: RelStorage-${{ runner.os }}-cp37-cp37m.whl
-          path: dist/
+      #- name: Download RelStorage wheel
+      #  uses: actions/download-artifact@v2
+      #  with:
+      #    name: RelStorage-${{ runner.os }}-cp37-cp37m.whl
+      #    path: dist/
       - name: Build mysqlclient
         run: |
           docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
@@ -384,6 +384,7 @@ jobs:
             apt-get install sudo -y && \
             sudo apt install software-properties-common -y && \
             sudo add-apt-repository ppa:deadsnakes/ppa && \
+            sudo apt-get update && \
             sudo apt install -y ${{ env.py }} ${{ env.py }}-pip && \
             ${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
