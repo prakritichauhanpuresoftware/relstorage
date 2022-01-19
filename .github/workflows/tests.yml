@@ -374,7 +374,7 @@ jobs:
       - name: Download RelStorage wheel
         uses: actions/download-artifact@v2
         with:
-          name: RelStorage-${{ runner.os }}-cp38-cp38m.whl
+          name: RelStorage-${{ runner.os }}-cp38-cp38.whl
           path: dist/
       - name: Build mysqlclient
         run: |
