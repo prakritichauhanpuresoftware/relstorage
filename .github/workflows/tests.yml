@@ -394,7 +394,7 @@ jobs:
             export CXXFLAGS="$CXXCFLAGS -std=gnu++11" && \
             echo $CXXFLAGS && \
             echo "Install native libs" && \
-            apt-get install -y libmemcached-dev libmysqlclient-dev && \
+            apt-get install -y libmemcached-dev libmysqlclient-dev libpq-dev && \
             echo "Build mysqlclient" && \
             pip install --no-binary :all: mysqlclient && \
             echo "Install RelStorage" && \
