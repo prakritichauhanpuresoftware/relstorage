@@ -395,7 +395,7 @@ jobs:
             echo $CXXFLAGS && \
             echo "Install native libs" && \
             export DEBIAN_FRONTEND=noninteractive && \
-            apt-get –assume-no install -y libmemcached-dev libmysqlclient-dev libpq-dev unzip systemd && \
+            apt-get install -y libmemcached-dev libmysqlclient-dev libpq-dev unzip systemd && \
             echo "Build mysqlclient" && \
             pip install --no-binary :all: mysqlclient && \
             echo "Install RelStorage" && \
