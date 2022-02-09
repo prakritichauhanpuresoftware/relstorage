@@ -385,7 +385,7 @@ jobs:
             #sudo apt install software-properties-common -y && \
             #sudo add-apt-repository ppa:deadsnakes/ppa && \
             #sudo apt-get update && \
-            apt install -y python3 python3-pip python3.8-venv && \
+            apt install -y python3 python3-pip python3.8-venv sudo && \
             ${{ env.py }} -m pip install virtualenv && ${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
             echo "Install ccache, configure CFLAGS (ubuntu)" && \
@@ -404,7 +404,7 @@ jobs:
             pip install -U "`ls dist/RelStorage-*.whl`[test,all_tested_drivers]" && \
             unzip -n dist/RelStorage-*whl -d src && \
             echo "Initialize Test Databases" && \
-            systemctl start mysql.service && \
+            sudo systemctl start mysql.service && \
             echo "Configuring MySQL" && \
             RELSTORAGETEST_MY_PW="--password=root" .travis/mysql.sh && \
             echo "Configuring PostgreSQL" && \
