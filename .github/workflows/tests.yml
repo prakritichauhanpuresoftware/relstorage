@@ -378,7 +378,7 @@ jobs:
           path: dist/
       - name: Build mysqlclient
         run: |
-          docker run --rm -v /run/systemd/system:/run/systemd/system -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+          docker run --rm --privileged -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             arm64v8/ubuntu \
             bash -exc 'apt-get update && apt-get -y upgrade && \
             #apt-get install sudo -y && \
