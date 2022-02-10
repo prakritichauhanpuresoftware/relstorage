@@ -411,6 +411,7 @@ jobs:
             apt-get install -y postgresql postgresql-contrib && \
             RELSTORAGETEST_MY_PW="--password=root" .travis/mysql.sh && \
             echo "Configuring PostgreSQL" && \
+            service postgresql start && \
             .travis/postgres.sh && \
             deactivate'
 
