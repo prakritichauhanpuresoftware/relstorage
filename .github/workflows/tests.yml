@@ -412,6 +412,7 @@ jobs:
             RELSTORAGETEST_MY_PW="--password=root" .travis/mysql.sh && \
             echo "Configuring PostgreSQL" && \
             service postgresql start && \
+            sudo find / -name "pg_hba.conf" &&\
             .travis/postgres.sh && \
             deactivate'
 
